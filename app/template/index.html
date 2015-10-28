@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="author" content="Tencent-CDC">
+    <title>Mozi.gulp</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/highlightjs.css">
+</head>
+<body>
+
+<h1>Hello, Mozi.gulp!</h1>
+<div class="container">
+    <h2>介绍</h2>
+    <p>Mozi.gulp 总结了墨子工作室日常开发中常用到的自动化需求，包含 LESS 编译，Swig 模版支持，静态资源加 hash 防止缓存，自动部署到 FTP，UI 组件文档，代码高亮等功能。</p>
+    <p>Mozi.gulp 还有更多待开发的特性：</p>
+    <ul>
+        <li>代码检查</li>
+        <li>自动生成雪碧图</li>
+        <li>JS 模块化支持</li>
+        <li>增加常用 JS 库</li>
+    </ul>
+
+    <h2>快速上手</h2>
+    <p>因为我们大部分的项目中使用的是 SVN，所以使用 SVN 的项目可以直接在项目文件夹中 clone 一个 Mozi.gulp 项目。</p>
+    <p>如，我准备新建一个 Tencent_2015Q3 的项目，在该项目文件夹中运行：</p>
+{% highlight 'bash' %}
+git clone http://git.code.oa.com/mozi/Mozi.gulp.git Tencent_2015Q3
+{% endhighlight %}
+    <p>然后复制 <code>_config/config.sample.js</code> 增加一个 <code>_config/config.js</code> 并进行简单的配置即可（后面详细介绍）。</p>
+
+    <h2>文件目录说明</h2>
+{% highlight 'js' %}
+.
+├── _config             // gulp 配置文件夹
+├── app                 // 开发文件目录
+│   ├── assets          // 静态资源目录
+│   │   ├── css         // 样式文件目录
+│   │   ├── fonts       // 字体文件目录
+│   │   ├── images      // 图片文件目录
+│   │   ├── media       // 媒体文件目录
+│   │   └── js          // 脚本文件目录
+│   │       └── vendor  // 第三方脚本文件目录
+│   ├── html            // 自动编译后的 HTML 文件目录
+│   ├── less            // less 文件
+│   │   ├── src         // 用于引用的 less 文件
+│   │   └── vendor      // 第三方 less 库
+│   │       └── est     // est less
+│   └── template        // swig 模版文件
+│       ├── layouts     // 布局模版
+│       └── partials    // 模版模块
+└─── dist               // 最后编译后的文件
+{% endhighlight %}
+
+    <h2>配置 Mozi.gulp</h2>
+    <p>编辑 Mozi.gulp 目录下的 <code>/_config/config.js</code>，其中必须修改 <code>ftpPath</code> 为你需要发布的文件路径，为了防止多个 Mozi.gulp 项目冲突，可以修改 <code>serverPort</code> 以及 <code>livereloadPort</code> 两个属性。</p>
+{% highlight 'js' %}
+var config = {
+
+    // 调试服务器地址
+    serverHost      : '0.0.0.0',
+
+    // 调试服务器端口
+    serverPort      : 8099,
+
+    // livereload 端口
+    livereloadPort  : 35729,
+
+    // 默认打开页面
+    serverIndex     : '/html/index.html',
+
+    // 开发文件目录
+    app             : 'app',
+
+    // 编译文件目录
+    dist            : 'dist',
+
+    // 需编译 less 文件
+    lessFiles       : ['app/less/*.less'],
+
+    // 需编译模版文件
+    tmplFiles       : ['app/template/*.html'],
+
+    // 脚本文件
+    scriptFiles     : ['app/assets/js/*.js'],
+
+    // 第三方脚本文件
+    venforFiles     : ['app/assets/js/vendor/*.js'],
+
+    // 需监听的 less 文件
+    lessFiles4Watch : ['app/less/**/*.less'],
+
+    // 需监听的模版文件
+    tmplFiles4Watch : ['app/template/**/*.html'],
+
+    // CSS 文件输出位置
+    cssOutputDir    : 'app/assets/css',
+
+    // HTML 文件输出位置
+    tmplOutputDir   : 'app/html',
+
+    // 启用 rev
+    rev             : true,
+
+    // rev 需要拷贝的文件
+    revFiles        : [
+        'app/**',
+        '!app/less',
+        '!app/less/**',
+        '!app/template',
+        '!app/template/**'
+    ],
+
+    // rev 需要忽略的文件
+    revIgnore       : [
+        /^\/favicon.ico$/ig,
+        /^\/assets\/js\/vendor\//ig
+    ],
+
+    // rev 需要忽略重命名文件
+    revIgnoreRename : [
+        '.html'
+    ],
+
+    // rev 不需要在这个文件检索替换
+    revIgnoreSearch : [],
+
+    // rev 不需要更新他的版本的文件
+    revIgnoreUpdate : [
+        '.html'
+    ],
+
+    // FTP 服务器
+    ftpHost: 'demo.cdc.im',
+
+    // FTP 账号
+    ftpUser: 'mode',
+
+    // FTP 密码
+    ftpPass: '',
+
+    // FTP 路径
+    // demo.cdc.im 的路径请设置前缀 /domains/demo.cdc.im/public_html/
+    ftpPath: '/domains/demo.cdc.im/public_html/testUpload'
+
+}
+
+module.exports = config;
+{% endhighlight %}
+
+    <h2>使用教程</h2>
+
+    <h3>开启本地调试功能</h3>
+{% highlight 'bash' %}
+gulp --dev
+{% endhighlight %}
+
+    <h3>编译待发布版本</h3>
+{% highlight 'bash' %}
+gulp build
+{% endhighlight %}
+
+    <h3>发布待发布版本到 FTP（需先配置 FTP 路径）</h3>
+{% highlight 'bash' %}
+gulp deploy
+{% endhighlight %}
+</div>
+<script src="../assets/js/vendor/jquery.min.js"></script>
+<script src="../assets/js/common.js"></script>
+</body>
+</html>
