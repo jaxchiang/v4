@@ -62,12 +62,6 @@ var handleChangeEvent = function(evt) {
     gutil.log('File:', gutil.colors.cyan(filename), 'was', gutil.colors.magenta(evt.type));
 }
 
-// gulp.task('js', function() {
-//     var combined = combiner.obj([
-//         gulp.src(config.componentsFiles)
-//     ]);
-// });
-
 // 处理样式任务
 gulp.task('css', function() {
     var combined = combiner.obj([
@@ -105,8 +99,6 @@ gulp.task('template', function() {
 
     return merge(combined, docCombined);
 });
-
-// 处理文档任务
 
 // 清空发布目录
 gulp.task('clean', function() {

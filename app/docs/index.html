@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="author" content="Tencent-CDC">
-    <title>Mozi.gulp</title>
+    <title>Mozi.gulp 使用指北</title>
     <link rel="stylesheet" href="../assets/css/docs.css">
     <link rel="stylesheet" href="../assets/css/highlightjs.css">
 </head>
@@ -36,7 +36,7 @@
     <p>因为我们大部分的项目中使用的是 SVN，所以使用 SVN 的项目可以直接在项目文件夹中 clone 一个 Mozi.gulp 项目。</p>
     <p>如，我准备新建一个 Tencent_2015Q3 的项目，在该项目文件夹中运行：</p>
 <pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> http://git.code.oa.com/mozi/Mozi.gulp.git Tencent_2015Q3</code></pre>
-    <p>然后复制 <code>_config/config.sample.js</code> 增加一个 <code>_config/config.js</code> 并进行简单的配置即可（后面详细介绍）。</p>
+    <p>然后根据 <code>_config/config.sample.js</code> 的模版创建一个 <code>_config/config.js</code> 文件，在 <code>config.js</code> 文件中只保留需要的配置项即可，<code>config.sample.js</code> 作为缺省的配置会被 <code>config.js</code> 的值覆盖。</p>
 
     <h2>文件目录说明</h2>
 <pre><code class="hljs js">.
@@ -49,6 +49,9 @@
 │   │   ├── media       <span class="hljs-comment">// 媒体文件目录</span>
 │   │   └── js          <span class="hljs-comment">// 脚本文件目录</span>
 │   │       └── vendor  <span class="hljs-comment">// 第三方脚本文件目录</span>
+│   ├── components      <span class="hljs-comment">// bower 组件文件夹</span>
+│   ├── <span class="hljs-built_in">document</span>        <span class="hljs-comment">// swig 文档模版文件</span>
+│   ├── docs            <span class="hljs-comment">// 自动编译后的文档文件</span>
 │   ├── html            <span class="hljs-comment">// 自动编译后的 HTML 文件目录</span>
 │   ├── less            <span class="hljs-comment">// less 文件</span>
 │   │   ├── src         <span class="hljs-comment">// 用于引用的 less 文件</span>
@@ -93,6 +96,9 @@
     <span class="hljs-comment">// 第三方脚本文件</span>
     venforFiles     : [<span class="hljs-string">'app/assets/js/vendor/*.js'</span>],
 
+    <span class="hljs-comment">// bower 脚本文件</span>
+    componentsFiles : [],
+
     <span class="hljs-comment">// 需监听的 less 文件</span>
     lessFiles4Watch : [<span class="hljs-string">'app/less/**/*.less'</span>],
 
@@ -105,6 +111,12 @@
     <span class="hljs-comment">// HTML 文件输出位置</span>
     tmplOutputDir   : <span class="hljs-string">'app/html'</span>,
 
+    <span class="hljs-comment">// Docs 文档模版</span>
+    docsTmplFiles   : [<span class="hljs-string">'app/document/*.html'</span>],
+
+    <span class="hljs-comment">// Docs 文档输出位置</span>
+    docsOutputDir   : <span class="hljs-string">'app/docs'</span>,
+
     <span class="hljs-comment">// 启用 rev</span>
     rev             : <span class="hljs-literal">true</span>,
 
@@ -114,7 +126,11 @@
         <span class="hljs-string">'!app/less'</span>,
         <span class="hljs-string">'!app/less/**'</span>,
         <span class="hljs-string">'!app/template'</span>,
-        <span class="hljs-string">'!app/template/**'</span>
+        <span class="hljs-string">'!app/template/**'</span>,
+        <span class="hljs-string">'!app/document'</span>,
+        <span class="hljs-string">'!app/document/**'</span>,
+        <span class="hljs-string">'!app/components'</span>,
+        <span class="hljs-string">'!app/components/**'</span>
     ],
 
     <span class="hljs-comment">// rev 需要忽略的文件</span>
@@ -156,12 +172,15 @@
     <h2>使用教程</h2>
 
     <h3>开启本地调试功能</h3>
+    <p>运行后会自动运行本地静态服务器环境，并监听文件变化自动刷新。</p>
 <pre><code class="hljs bash">gulp --dev</code></pre>
 
     <h3>编译待发布版本</h3>
+    <p>运行后会将可以发布的静态文件编译并拷贝到 <code>./dist</code> 文件夹内，如果开启了 <code>rev</code> 则会对静态资源文件加 hash 防止缓存。</p>
 <pre><code class="hljs bash">gulp build</code></pre>
 
     <h3>发布待发布版本到 FTP（需先配置 FTP 路径）</h3>
+    <p>运行后会将 <code>./dist</code> 目录中的所有文件通过 FTP 上传到 <code>config.ftpPath</code> 指定的路径上。</p>
 <pre><code class="hljs bash">gulp deploy</code></pre>
 </div>
 <script src="../assets/js/vendor/jquery.min.js"></script>

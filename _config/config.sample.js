@@ -30,6 +30,9 @@ var config = {
     // 第三方脚本文件
     venforFiles     : ['app/assets/js/vendor/*.js'],
 
+    // bower 脚本文件
+    componentsFiles : [],
+
     // 需监听的 less 文件
     lessFiles4Watch : ['app/less/**/*.less'],
 

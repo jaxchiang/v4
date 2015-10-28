@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="author" content="Tencent-CDC">
-    <title>Mozi.gulp</title>
+    <title>Mozi.gulp 使用指北</title>
     <link rel="stylesheet" href="../assets/css/docs.css">
     <link rel="stylesheet" href="../assets/css/highlightjs.css">
 </head>
@@ -38,7 +38,7 @@
 {% highlight 'bash' %}
 git clone http://git.code.oa.com/mozi/Mozi.gulp.git Tencent_2015Q3
 {% endhighlight %}
-    <p>然后复制 <code>_config/config.sample.js</code> 增加一个 <code>_config/config.js</code> 并进行简单的配置即可（后面详细介绍）。</p>
+    <p>然后根据 <code>_config/config.sample.js</code> 的模版创建一个 <code>_config/config.js</code> 文件，在 <code>config.js</code> 文件中只保留需要的配置项即可，<code>config.sample.js</code> 作为缺省的配置会被 <code>config.js</code> 的值覆盖。</p>
 
     <h2>文件目录说明</h2>
 {% highlight 'js' %}
@@ -52,6 +52,9 @@ git clone http://git.code.oa.com/mozi/Mozi.gulp.git Tencent_2015Q3
 │   │   ├── media       // 媒体文件目录
 │   │   └── js          // 脚本文件目录
 │   │       └── vendor  // 第三方脚本文件目录
+│   ├── components      // bower 组件文件夹
+│   ├── document        // swig 文档模版文件
+│   ├── docs            // 自动编译后的文档文件
 │   ├── html            // 自动编译后的 HTML 文件目录
 │   ├── less            // less 文件
 │   │   ├── src         // 用于引用的 less 文件
@@ -98,6 +101,9 @@ var config = {
     // 第三方脚本文件
     venforFiles     : ['app/assets/js/vendor/*.js'],
 
+    // bower 脚本文件
+    componentsFiles : [],
+
     // 需监听的 less 文件
     lessFiles4Watch : ['app/less/**/*.less'],
 
@@ -110,6 +116,12 @@ var config = {
     // HTML 文件输出位置
     tmplOutputDir   : 'app/html',
 
+    // Docs 文档模版
+    docsTmplFiles   : ['app/document/*.html'],
+
+    // Docs 文档输出位置
+    docsOutputDir   : 'app/docs',
+
     // 启用 rev
     rev             : true,
 
@@ -119,7 +131,11 @@ var config = {
         '!app/less',
         '!app/less/**',
         '!app/template',
-        '!app/template/**'
+        '!app/template/**',
+        '!app/document',
+        '!app/document/**',
+        '!app/components',
+        '!app/components/**'
     ],
 
     // rev 需要忽略的文件
@@ -162,16 +178,19 @@ module.exports = config;
     <h2>使用教程</h2>
 
     <h3>开启本地调试功能</h3>
+    <p>运行后会自动运行本地静态服务器环境，并监听文件变化自动刷新。</p>
 {% highlight 'bash' %}
 gulp --dev
 {% endhighlight %}
 
     <h3>编译待发布版本</h3>
+    <p>运行后会将可以发布的静态文件编译并拷贝到 <code>./dist</code> 文件夹内，如果开启了 <code>rev</code> 则会对静态资源文件加 hash 防止缓存。</p>
 {% highlight 'bash' %}
 gulp build
 {% endhighlight %}
 
     <h3>发布待发布版本到 FTP（需先配置 FTP 路径）</h3>
+    <p>运行后会将 <code>./dist</code> 目录中的所有文件通过 FTP 上传到 <code>config.ftpPath</code> 指定的路径上。</p>
 {% highlight 'bash' %}
 gulp deploy
 {% endhighlight %}
