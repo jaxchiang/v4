@@ -3,6 +3,7 @@
  * Created by Lukezhu
  */
 
+var _        = require('underscore');
 var gulp     = require('gulp');
 var del      = require('del');
 var path     = require('path');
@@ -18,7 +19,9 @@ var $        = require('gulp-load-plugins')({
 });
 
 // 获取基本配置信息
-var config = require('./_config/config.js');
+// 默认配置使用 config.sample.js 的配置
+// 如果用户在 config.js 中设置了值则以用户的为准
+var config = _.extend(require('./_config/config.sample.js'), require('./_config/config.js'));
 
 // ftp 配置信息
 var ftpConnection = vftp.create({

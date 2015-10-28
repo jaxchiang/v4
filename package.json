@@ -29,6 +29,7 @@
     "highlight.js": "^8.8.0",
     "merge-stream": "^1.0.0",
     "stream-combiner2": "^1.0.2",
+    "underscore": "^1.8.3",
     "vinyl-fs": "^2.2.1",
     "vinyl-paths": "^2.0.0"
   }
