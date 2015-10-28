@@ -1,0 +1,25 @@
+{
+  "name": "Mozi.gulp",
+  "description": "Mozi.gulp is a usefull front-end workflow helps you improve your develope time.",
+  "main": "index.html",
+  "authors": [
+    "Lukezhu<lukezhu@tencent.com>"
+  ],
+  "license": "ISC",
+  "moduleType": [
+    "amd"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.4",
+    "zepto": "~1.1.6"
+  }
+}

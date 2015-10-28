@@ -42,6 +42,12 @@ var config = {
     // HTML 文件输出位置
     tmplOutputDir   : 'app/html',
 
+    // Docs 文档模版
+    docsTmplFiles   : ['app/document/*.html'],
+
+    // Docs 文档输出位置
+    docsOutputDir   : 'app/docs',
+
     // 启用 rev
     rev             : true,
 
@@ -51,7 +57,11 @@ var config = {
         '!app/less',
         '!app/less/**',
         '!app/template',
-        '!app/template/**'
+        '!app/template/**',
+        '!app/document',
+        '!app/document/**',
+        '!app/components',
+        '!app/components/**'
     ],
 
     // rev 需要忽略的文件

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="email=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="author" content="Tencent-CDC">
+    <title>Mozi.gulp</title>
+    <link rel="stylesheet" href="../assets/css/docs.css">
+    <link rel="stylesheet" href="../assets/css/highlightjs.css">
+</head>
+<body>
+
+<h1>Hello, Mozi.gulp!</h1>
+<div class="container">
+    <h2>介绍</h2>
+    <p>Mozi.gulp 总结了墨子工作室日常开发中常用到的自动化需求，包含 LESS 编译，Swig 模版支持，静态资源加 hash 防止缓存，自动部署到 FTP，UI 组件文档，代码高亮等功能。</p>
+    <p>Mozi.gulp 还有更多待开发的特性：</p>
+    <ul>
+        <li>代码检查</li>
+        <li>自动生成雪碧图</li>
+        <li>JS 模块化支持</li>
+        <li>增加常用 JS 库</li>
+    </ul>
+    <p>Mozi.gulp 使用的第三方库文档：</p>
+    <ul>
+        <li>Less: <a href="http://lesscss.org/">http://lesscss.org/</a></li>
+        <li>Est: <a href="http://ecomfe.github.io/est/">http://ecomfe.github.io/est/</a></li>
+        <li>Swig: <a href="http://paularmstrong.github.io/swig/docs/">http://paularmstrong.github.io/swig/docs/</a></li>
+    </ul>
+
+    <h2>快速上手</h2>
+    <p>因为我们大部分的项目中使用的是 SVN，所以使用 SVN 的项目可以直接在项目文件夹中 clone 一个 Mozi.gulp 项目。</p>
+    <p>如，我准备新建一个 Tencent_2015Q3 的项目，在该项目文件夹中运行：</p>
+<pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> http://git.code.oa.com/mozi/Mozi.gulp.git Tencent_2015Q3</code></pre>
+    <p>然后复制 <code>_config/config.sample.js</code> 增加一个 <code>_config/config.js</code> 并进行简单的配置即可（后面详细介绍）。</p>
+
+    <h2>文件目录说明</h2>
+<pre><code class="hljs js">.
+├── _config             <span class="hljs-comment">// gulp 配置文件夹</span>
+├── app                 <span class="hljs-comment">// 开发文件目录</span>
+│   ├── assets          <span class="hljs-comment">// 静态资源目录</span>
+│   │   ├── css         <span class="hljs-comment">// 样式文件目录</span>
+│   │   ├── fonts       <span class="hljs-comment">// 字体文件目录</span>
+│   │   ├── images      <span class="hljs-comment">// 图片文件目录</span>
+│   │   ├── media       <span class="hljs-comment">// 媒体文件目录</span>
+│   │   └── js          <span class="hljs-comment">// 脚本文件目录</span>
+│   │       └── vendor  <span class="hljs-comment">// 第三方脚本文件目录</span>
+│   ├── html            <span class="hljs-comment">// 自动编译后的 HTML 文件目录</span>
+│   ├── less            <span class="hljs-comment">// less 文件</span>
+│   │   ├── src         <span class="hljs-comment">// 用于引用的 less 文件</span>
+│   │   └── vendor      <span class="hljs-comment">// 第三方 less 库</span>
+│   │       └── est     <span class="hljs-comment">// est less</span>
+│   └── template        <span class="hljs-comment">// swig 模版文件</span>
+│       ├── layouts     <span class="hljs-comment">// 布局模版</span>
+│       └── partials    <span class="hljs-comment">// 模版模块</span>
+└─── dist               <span class="hljs-comment">// 最后编译后的文件</span></code></pre>
+
+    <h2>配置 Mozi.gulp</h2>
+    <p>编辑 Mozi.gulp 目录下的 <code>/_config/config.js</code>，其中必须修改 <code>ftpPath</code> 为你需要发布的文件路径，为了防止多个 Mozi.gulp 项目冲突，可以修改 <code>serverPort</code> 以及 <code>livereloadPort</code> 两个属性。</p>
+<pre><code class="hljs js"><span class="hljs-keyword">var</span> config = {
+
+    <span class="hljs-comment">// 调试服务器地址</span>
+    serverHost      : <span class="hljs-string">'0.0.0.0'</span>,
+
+    <span class="hljs-comment">// 调试服务器端口</span>
+    serverPort      : <span class="hljs-number">8099</span>,
+
+    <span class="hljs-comment">// livereload 端口</span>
+    livereloadPort  : <span class="hljs-number">35729</span>,
+
+    <span class="hljs-comment">// 默认打开页面</span>
+    serverIndex     : <span class="hljs-string">'/html/index.html'</span>,
+
+    <span class="hljs-comment">// 开发文件目录</span>
+    app             : <span class="hljs-string">'app'</span>,
+
+    <span class="hljs-comment">// 编译文件目录</span>
+    dist            : <span class="hljs-string">'dist'</span>,
+
+    <span class="hljs-comment">// 需编译 less 文件</span>
+    lessFiles       : [<span class="hljs-string">'app/less/*.less'</span>],
+
+    <span class="hljs-comment">// 需编译模版文件</span>
+    tmplFiles       : [<span class="hljs-string">'app/template/*.html'</span>],
+
+    <span class="hljs-comment">// 脚本文件</span>
+    scriptFiles     : [<span class="hljs-string">'app/assets/js/*.js'</span>],
+
+    <span class="hljs-comment">// 第三方脚本文件</span>
+    venforFiles     : [<span class="hljs-string">'app/assets/js/vendor/*.js'</span>],
+
+    <span class="hljs-comment">// 需监听的 less 文件</span>
+    lessFiles4Watch : [<span class="hljs-string">'app/less/**/*.less'</span>],
+
+    <span class="hljs-comment">// 需监听的模版文件</span>
+    tmplFiles4Watch : [<span class="hljs-string">'app/template/**/*.html'</span>],
+
+    <span class="hljs-comment">// CSS 文件输出位置</span>
+    cssOutputDir    : <span class="hljs-string">'app/assets/css'</span>,
+
+    <span class="hljs-comment">// HTML 文件输出位置</span>
+    tmplOutputDir   : <span class="hljs-string">'app/html'</span>,
+
+    <span class="hljs-comment">// 启用 rev</span>
+    rev             : <span class="hljs-literal">true</span>,
+
+    <span class="hljs-comment">// rev 需要拷贝的文件</span>
+    revFiles        : [
+        <span class="hljs-string">'app/**'</span>,
+        <span class="hljs-string">'!app/less'</span>,
+        <span class="hljs-string">'!app/less/**'</span>,
+        <span class="hljs-string">'!app/template'</span>,
+        <span class="hljs-string">'!app/template/**'</span>
+    ],
+
+    <span class="hljs-comment">// rev 需要忽略的文件</span>
+    revIgnore       : [
+        <span class="hljs-regexp">/^\/favicon.ico$/ig</span>,
+        <span class="hljs-regexp">/^\/assets\/js\/vendor\//ig</span>
+    ],
+
+    <span class="hljs-comment">// rev 需要忽略重命名文件</span>
+    revIgnoreRename : [
+        <span class="hljs-string">'.html'</span>
+    ],
+
+    <span class="hljs-comment">// rev 不需要在这个文件检索替换</span>
+    revIgnoreSearch : [],
+
+    <span class="hljs-comment">// rev 不需要更新他的版本的文件</span>
+    revIgnoreUpdate : [
+        <span class="hljs-string">'.html'</span>
+    ],
+
+    <span class="hljs-comment">// FTP 服务器</span>
+    ftpHost: <span class="hljs-string">'demo.cdc.im'</span>,
+
+    <span class="hljs-comment">// FTP 账号</span>
+    ftpUser: <span class="hljs-string">'mode'</span>,
+
+    <span class="hljs-comment">// FTP 密码</span>
+    ftpPass: <span class="hljs-string">''</span>,
+
+    <span class="hljs-comment">// FTP 路径</span>
+    <span class="hljs-comment">// demo.cdc.im 的路径请设置前缀 /domains/demo.cdc.im/public_html/</span>
+    ftpPath: <span class="hljs-string">'/domains/demo.cdc.im/public_html/testUpload'</span>
+
+}
+
+<span class="hljs-built_in">module</span>.exports = config;</code></pre>
+
+    <h2>使用教程</h2>
+
+    <h3>开启本地调试功能</h3>
+<pre><code class="hljs bash">gulp --dev</code></pre>
+
+    <h3>编译待发布版本</h3>
+<pre><code class="hljs bash">gulp build</code></pre>
+
+    <h3>发布待发布版本到 FTP（需先配置 FTP 路径）</h3>
+<pre><code class="hljs bash">gulp deploy</code></pre>
+</div>
+<script src="../assets/js/vendor/jquery.min.js"></script>
+<script src="../assets/js/common.js"></script>
+</body>
+</html>

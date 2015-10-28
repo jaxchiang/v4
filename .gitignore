@@ -1,6 +1,7 @@
 # Temp files #
 dist
 node_modules
+app/components/
 
 # Config File #
 _config/config.js

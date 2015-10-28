@@ -4,12 +4,14 @@
  */
 
 var gulp     = require('gulp');
-var rimraf   = require('rimraf');
+var del      = require('del');
 var path     = require('path');
 var gutil    = require('gulp-util');
 var vfs      = require('vinyl-fs');
 var vftp     = require('vinyl-ftp');
+var vpath    = require('vinyl-paths');
 var combiner = require('stream-combiner2');
+var merge    = require('merge-stream');
 var $        = require('gulp-load-plugins')({
     pattern: ['gulp-*', 'gulp.*'],
     replaceString: /\bgulp[\-.]/
@@ -57,6 +59,12 @@ var handleChangeEvent = function(evt) {
     gutil.log('File:', gutil.colors.cyan(filename), 'was', gutil.colors.magenta(evt.type));
 }
 
+// gulp.task('js', function() {
+//     var combined = combiner.obj([
+//         gulp.src(config.componentsFiles)
+//     ]);
+// });
+
 // 处理样式任务
 gulp.task('css', function() {
     var combined = combiner.obj([
@@ -84,12 +92,30 @@ gulp.task('template', function() {
 
     combined.on('error', console.error.bind(console));
 
-    return combined;
+    var docCombined = combiner.obj([
+        gulp.src(config.docsTmplFiles),
+        $.swig(swigOptions),
+        gulp.dest(config.docsOutputDir)
+    ]);
+
+    docCombined.on('error', console.error.bind(console));
+
+    return merge(combined, docCombined);
 });
 
+// 处理文档任务
+
 // 清空发布目录
-gulp.task('clean', ['css', 'template'], function(cb) {
-    rimraf([config.dist, '/**'].join(), cb);
+gulp.task('clean', function() {
+    var combined = combiner.obj([
+        gulp.src('dist/*'),
+        vpath(del),
+        gutil.noop()
+    ]);
+
+    combined.on('error', console.error.bind(console));
+
+    return combined;
 });
 
 // 给静态文件生成 hash 防止缓存
