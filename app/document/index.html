@@ -36,7 +36,10 @@
     <p>因为我们大部分的项目中使用的是 SVN，所以使用 SVN 的项目可以直接在项目文件夹中 clone 一个 Mozi.gulp 项目。</p>
     <p>如，我准备新建一个 Tencent_2015Q3 的项目，在该项目文件夹中运行：</p>
 {% highlight 'bash' %}
-git clone http://git.code.oa.com/mozi/Mozi.gulp.git Tencent_2015Q3
+git init
+git remote add origin http://git.code.oa.com/mozi/Mozi.gulp.git
+git fetch
+git checkout -t origin/master
 {% endhighlight %}
     <p>然后根据 <code>_config/config.sample.js</code> 的模版创建一个 <code>_config/config.js</code> 文件，在 <code>config.js</code> 文件中只保留需要的配置项即可，<code>config.sample.js</code> 作为缺省的配置会被 <code>config.js</code> 的值覆盖。</p>
 
@@ -70,6 +73,9 @@ git clone http://git.code.oa.com/mozi/Mozi.gulp.git Tencent_2015Q3
     <p>编辑 Mozi.gulp 目录下的 <code>/_config/config.js</code>，其中必须修改 <code>ftpPath</code> 为你需要发布的文件路径，为了防止多个 Mozi.gulp 项目冲突，可以修改 <code>serverPort</code> 以及 <code>livereloadPort</code> 两个属性。</p>
 {% highlight 'js' %}
 var config = {
+
+    // 项目名称
+    projectName     : 'Mozi.gulp',
 
     // 调试服务器地址
     serverHost      : '0.0.0.0',
