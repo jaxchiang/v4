@@ -1,5 +1,8 @@
 var config = {
 
+    // 项目名称
+    projectName     : 'Mozi.gulp',
+
     // 调试服务器地址
     serverHost      : '0.0.0.0',
 
@@ -13,10 +16,13 @@ var config = {
     serverIndex     : '/html/index.html',
 
     // 开发文件目录
-    app             : 'app',
+    app             : './app',
 
     // 编译文件目录
-    dist            : 'dist',
+    dist            : './dist',
+
+    // 打包文件目录
+    release         : './release',
 
     // 需编译 less 文件
     lessFiles       : ['app/less/*.less'],

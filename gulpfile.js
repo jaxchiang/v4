@@ -13,6 +13,7 @@ var vftp     = require('vinyl-ftp');
 var vpath    = require('vinyl-paths');
 var combiner = require('stream-combiner2');
 var merge    = require('merge-stream');
+var moment   = require('moment');
 var $        = require('gulp-load-plugins')({
     pattern: ['gulp-*', 'gulp.*'],
     replaceString: /\bgulp[\-.]/
@@ -134,10 +135,36 @@ gulp.task('rev', ['css', 'template', 'clean'], function() {
 // 发布文件到 ftp
 gulp.task('deploy', function() {
     vfs.src([
-        './dist/**'
+        [config.dist, '/**'].join(''),
+        ['!', config.dist, '/manifest.json'].join('')
     ], { buffer: false })
         .pipe(ftpConnection.dest(config.ftpPath));
-})
+});
+
+// 打包任务
+// gulp release 以时间为版本命名文件
+// gulp release -v 1.1.0 可指定版本号
+gulp.task('release', ['rev'], function() {
+    var version = gutil.env.v ? gutil.env.v : moment().format('YYMMDDHHmm');
+    var packageName = [config.projectName, version].join('_');
+
+    var combined = combiner.obj([
+        gulp.src([
+            [config.dist, '/**/*'].join(''),
+            ['!', config.dist, '/manifest.json'].join('')
+        ]),
+        $.zip([packageName, 'zip'].join('.')),
+        gulp.dest(config.release)
+    ]);
+
+    combined.on('error', console.error.bind(console));
+
+    combined.on('end', function() {
+        gutil.log(['Package Success: ', packageName, '.zip has been created on ', config.release].join(''));
+    });
+
+    return combined;
+});
 
 // 开发任务
 // gulp --dev

@@ -194,6 +194,15 @@ gulp build
 {% highlight 'bash' %}
 gulp deploy
 {% endhighlight %}
+
+    <h3>打包 zip 文件</h3>
+    <p>运行后会将 <code>./dist</code> 目录中的所有文件压缩成 zip 文件到 <code>./release</code> 中，方便存档备份。</p>
+    <p>zip 文件的命名方式默认以 <code>config.projectName_版本号.zip</code> 命名，<code>-v</code> 参数可以指定版本号，不指定版本号则以当前时间作为版本号。</p>
+{% highlight 'bash' %}
+gulp release // Mozi.gulp_1510291305.zip
+
+gulp release -v 1.0.1 // Mozi.gulp_1.0.1.zip
+{% endhighlight %}
 </div>
 <script src="../assets/js/vendor/jquery.min.js"></script>
 <script src="../assets/js/common.js"></script>
