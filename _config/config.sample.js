@@ -62,15 +62,18 @@ var config = {
 
     // rev 需要拷贝的文件
     revFiles        : [
-        'app/**',
-        '!app/less',
-        '!app/less/**',
-        '!app/template',
-        '!app/template/**',
-        '!app/document',
-        '!app/document/**',
-        '!app/components',
-        '!app/components/**'
+        'app/assets/**',
+        'app/html/**',
+        'app/docs/**'
+        // 'app/**',
+        // '!app/less',
+        // '!app/less/**',
+        // '!app/template',
+        // '!app/template/**',
+        // '!app/document',
+        // '!app/document/**',
+        // '!app/components',
+        // '!app/components/**'
     ],
 
     // rev 需要忽略的文件
