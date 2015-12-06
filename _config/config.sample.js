@@ -43,7 +43,7 @@ var config = {
     lessFiles4Watch : ['app/less/**/*.less'],
 
     // 需监听的模版文件
-    tmplFiles4Watch : ['app/template/**/*.html'],
+    tmplFiles4Watch : ['app/template/**/*.html', 'app/document/**/*.html'],
 
     // CSS 文件输出位置
     cssOutputDir    : 'app/assets/css',
