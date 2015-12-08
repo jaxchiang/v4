@@ -125,7 +125,7 @@ gulp.task('rev', ['css', 'template', 'clean'], function() {
         dontUpdateReference : config.revIgnoreUpdate
     });
 
-    return gulp.src(config.revFiles)
+    return gulp.src(config.revFiles, { base: config.app })
         .pipe(config.rev ? revAll.revision() : gutil.noop())
         .pipe(gulp.dest(config.dist))
         .pipe(config.rev ? revAll.manifestFile() : gutil.noop())
