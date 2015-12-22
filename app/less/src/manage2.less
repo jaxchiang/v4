@@ -1,0 +1,340 @@
+@red: #e1504a;
+@orange: #fa7821;
+@green: #1cbd55;
+@text-color: #4e4e4e;
+@link-color: #0070cc;
+.mod_container_title {
+    .tit_tip {
+        color: @link-color;
+    }
+}
+
+.mod_tabs_list {
+    li {
+        &.current {
+            color: @link-color;
+        }
+    }
+}
+
+.btn_blue {
+    background-color: @link-color;
+}
+
+.text_link {
+    color: @link-color;
+}
+
+.apply_panel_cont {
+    padding: 16px 22px;
+    .topbar {
+        overflow: hidden;
+        padding: 0;
+        font-size: 14px;
+        color: @text-color;
+        .box-sizing(border-box);
+        li {
+            label {
+                color: #a2a2a2;
+            }
+            p {
+                color: #4e4e4e;
+            }
+        }
+        .line {
+            display: block;
+            width: 100%;
+            height: 1px;
+            background-color: #e4e4e4;
+            margin-bottom: 20px;
+        }
+        .advance_services {
+            list-style: square outside none;
+            margin-left: 18px;
+            li {
+                float: left;
+                display: list-item;
+                list-style: square;
+                margin-right: 40px;
+            }
+        }
+        .choosed_param {
+            margin-left: 18px;
+        }
+        .ui_progress {
+            width: 600px;
+        }
+        .form-ctrl-label {
+            color: #4e4e4e;
+            span {
+                color: #a2a2a2;
+            }
+        }
+        .pay_num {
+            color: #fa7821;
+            font-size: 24px;
+            .unit {
+                font-size: 14px;
+            }
+            .after_change {
+                font-size: 14px;
+                color: #a2a2a2;
+                .after_change_num {
+                    color: #fa7821;
+                }
+            }
+        }
+        .pay_label {
+            padding-top: 8px;
+        }
+    }
+    .topbar_left {
+        .inline-block();
+        width: 74%;
+        h4,
+        p {
+            width: 100%;
+            .ellipsis();
+        }
+        .remarks {
+            color: #4e4e4e;
+        }
+    }
+    .topbar_right {
+        color: #a2a2a2;
+        .inline-block();
+        width: 24%;
+        text-align: right;
+        position: relative;
+        top: -6px;
+    }
+    .apply_panel_list {
+        .clearfix();
+    }
+    .status_bar {
+        padding-top: 10px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #e4e4e4;
+        i {
+            .inline-block();
+            vertical-align: middle;
+            width: 38px;
+            height: 38px;
+        }
+        .status_title {
+            .inline-block();
+            font-size: 24px;
+            vertical-align: middle;
+            color: @orange;
+        }
+        .status_tips {
+            .inline-block();
+            font-size: 12px;
+            color: #666;
+            position: relative;
+            top: 8px;
+            left: 6px;
+            .num {
+                color: @orange;
+            }
+        }
+    }
+    .usage_bar {
+        .usage_bar_line {
+            line-height: 30px;
+            position: relative;
+            margin-top: 10px;
+        }
+        font-size: 14px;
+        .tc-15-progress {
+            width: 200px;
+            .inline-block();
+            margin-bottom: 0;
+            span {
+                top: -6px;
+                left: 210px;
+                width: 400px;
+            }
+        }
+        .usage_bar_title,
+        .usage_bar_content,
+        .tc-15-bubble {
+            .inline-block();
+        }
+        .tc-15-bubble {
+            position: absolute;
+            top: -4px;
+            left: 65px;
+        }
+    }
+}
+
+.operate_bar {
+    background-color: #f2f2f2;
+    padding: 10px 20px;
+    border: 1px solid #e4e4e4;
+    border-top: none;
+}
+
+.dialog_app_manage {
+    position: fixed;
+    top: 50%;
+    margin-top: -119px;
+    left: 50%;
+    margin-left: -240px;
+    .icon_pause {
+        float: left;
+    }
+    .dialog_title {
+        font-size: 18px;
+        color: #4e4e4e;
+        padding-left: 64px;
+    }
+    .dialog_content {
+        font-size: 14px;
+        color: #4e4e4e;
+        padding-left: 64px;
+        padding-top: 20px;
+    }
+}
+
+.ui_progress .progress_area .progress_bar {
+    background-color: transparent;
+}
+
+.search_option {
+    .active {
+        background: #0070cc;
+        border: 1px solid #0070cc;
+    }
+}
+
+.segment_warm {
+    text-align: center;
+    border: 1px solid #e4e4e4;
+    .icon_pause {
+        display: block;
+        margin: 0 auto;
+        margin-top: 38px;
+    }
+    .segment_warm_title {
+        font-size: 22px;
+        color: #4e4e4e;
+        text-align: center;
+        padding-top: 18px;
+        padding-bottom: 7px;
+    }
+    .segment_warm_content {
+        font-size: 14px;
+        color: #666;
+        text-align: center;
+        padding-bottom: 22px;
+    }
+    button {
+        margin-bottom: 68px;
+    }
+}
+
+.mask_expored {
+    display: block;
+}
+
+.dialog_app_expired {
+    display: block;
+    position: fixed;
+    top: 50%;
+    margin-top: -179px;
+    left: 50%;
+    margin-left: -240px;
+    .icon_pause {
+        float: left;
+    }
+    .dialog_title {
+        font-size: 18px;
+        color: #4e4e4e;
+        padding-left: 64px;
+    }
+    .dialog_content {
+        font-size: 14px;
+        color: #4e4e4e;
+        padding-left: 64px;
+        padding-top: 20px;
+    }
+}
+
+.dialog_questions {
+    text-align: center;
+    -webkit-animation: iosScale 0.3s;
+    animation: iosScale 0.3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-delay: 0.1s;
+    animation-delay: 0.1s;
+    width: 712px;
+    left: 50%;
+    margin-left: -356px;
+    top: 50%;
+    margin-top: -335px;
+    display: block;
+    position: fixed;
+    .survery_title {
+        font-size: 20px;
+        font-weight: bold;
+        padding-top: 30px;
+        padding-bottom: 16px;
+        .survery_title_num {
+            color: #fa7821;
+        }
+    }
+    .dialog_layer_cont {
+        padding: 20px 64px;
+    }
+    .question_wrap {
+        padding-top: 40px;
+        text-align: left;
+        label {
+            width: 112px;
+            display: inline-block;
+            margin-bottom: 24px;
+        }
+        .label_for {
+            width: 230px;
+        }
+        .label_other {
+            width: 240px;
+        }
+    }
+    input[type="checkbox"] {
+        margin-right: 7px;
+    }
+    .question_title {
+        padding-bottom: 24px;
+    }
+    .other {
+        margin-left: 7px;
+    }
+    input[type=radio]:checked {
+        background-position: 0 -15px;
+    }
+    input[type=radio] {
+        -webkit-appearance: none;
+        vertical-align: middle;
+        margin-right: 5px;
+        width: 15px;
+        height: 15px;
+        background-repeat: no-repeat;
+        background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAMAAAAM7l6QAAABIFBMVEUAAADIyMj////JycnIyMjs7Oz6+vrt7e3////////IyMjIyMjJycnS0tL////IyMjIyMj////R0dHIyMj////Ozs7IyMjIyMj////MzMzIyMjOzs729vb////////g4ODMzMz39/ff39/IyMjIyMj///8OhthkseZqtOcMhddyuOhmsuatra2Dg4P1+v1lsuarq6tutueoqKgRh9j5/P6srKyFhYVwt+gLhNdptOcWitkNhdenp6eCgoKBgYETiNj8/Pz09PT9/v/29vaEhISpqan2+/7k5OTm5ubT09P+/v77+/vR0dHJycn9/f3S0tL6+vrIyMjKysr19fXx8fHY2Njn5+fg4OB+fn7t7e0Egdbi4uLj4+PLy8vo6Oj///8tGjAMAAAAJnRSTlMAU1P++Pbz/hQWFP72/oby0oP98VTogobOkBXqjfr06IyQ6RbQ02Fsc5MAAAFDSURBVCjPzZFVcgMxEAXHTGFmZmY0JI4phkXvOo7o/reItCvJrvgAyft71VWj0TQAQAuZjmPiFoTJLk7F43sLWVn7BLuG4WLSD2pk1kO+j7zJSEjtLgvStQWP5Ho0SC8nuEUk5ZxYsDImKedjuwAYMx2MYMujtF49r9w3KPWWAUx3gF0T5hGlN188Z5SiVYCOMcDNDsR86hcEfqDUjwE4Q/iNgMNxUeAKpQ3ya3gbxvnwvMBXfPjMyGqbYrV8sVCt89V2Rj62RgYfI9sAbPgsDDIJW53FTmRAcII/msY7PyrjNZoi4VFJKhpclVmo3XE+scWCOpcMazIqnai3ZU1P7K9vLE2nZf1bobXn29LjnRaqooSefvOcaKEqUmj5VeAXJVRHCi0/CVxSQnWU0EOBr7VQPVwKvbg8PjiqaaF6tX8t9Afsq+G77cfHigAAAABJRU5ErkJggg==");
+        cursor: pointer;
+    }
+    input[type=text],
+    .input_style {
+        color: #404a58;
+        border: 1px solid #d1d2d3;
+        height: 25px;
+        line-height: 25px;
+        line-height: 25px\9;
+        /* width: 88px; */
+        /* border-radius: 3px; */
+        text-align: left;
+    }
+}

@@ -1,0 +1,437 @@
+/*点击滚动区域*/
+.manage_scroll_wrap {
+    position: relative;
+    margin-top: 30px;
+}
+.scroll_list {
+    margin: 0 auto;
+    padding: 10px 0;
+    width: 848px;
+    overflow: hidden;
+}
+.scroll_list_item {
+    position: relative;
+    float: left;
+    margin: 0 15px;
+    _display: inline;
+    width: 180px;
+    height: 171px;
+    background-color: #fbfbfb;
+    border: 1px solid #e4e4e4;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.scroll_item_cover {
+    z-index: 10;
+    position: absolute;
+    top: 172px;
+    left: 0;
+    width: 180px;
+    height: 171px;
+    background-color: rgba(0,0,0,.8);
+    filter:alpha(opacity=80);
+    background-color: #000\9;
+    color: #FFF;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+.scroll_item_cover .text {
+    display: table-cell;
+    *display: block;
+    width: 160px;
+    height: 151px;
+    vertical-align: middle;
+    padding: 10px;
+    line-height: 20px;
+}
+.scroll_list_hover{
+    color: #2a2a2a;
+    cursor: pointer;
+}
+.scroll_list_hover:hover .scroll_item_cover{
+    top: 0;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+.scroll_list_item .tit {
+    margin-top: 24px;
+    padding: 0 10px;
+    height: 46px;
+    line-height: 24px;
+    font-size: 14px;
+    text-align: center;
+    overflow: hidden;
+}
+.scroll_list_item .icon_cont {
+    text-align: center;
+}
+.ico_scroll_1_1 {
+    background-image: url(../images/center/ico_scroll_1.png);
+}
+.ico_scroll_2_1 {
+    background-image: url(../images/center/ico_scroll_2.png);
+}
+.ico_scroll_3_1 {
+    background-image: url(../images/center/ico_scroll_3.png);
+}
+.ico_scroll_4_1 {
+    background-image: url(../images/center/ico_scroll_4.png);
+}
+.ico_scroll_5_1 {
+    background-image: url(../images/center/ico_scroll_5.png);
+}
+.ico_scroll_6_1 {
+    background-image: url(../images/center/ico_scroll_1_3.png);
+}
+.ico_scroll_7_1 {
+    background-image: url(../images/center/ico_scroll_2_3.png);
+}
+.ico_scroll_8_1 {
+    background-image: url(../images/center/ico_scroll_3_3.png);
+}
+
+.scroll_list_item .icon_cont .ico_ny {
+    width: 100px;
+    height: 80px;
+    margin-top: -10px;
+}
+.scroll_list_current {
+    background-color: #fff;
+    box-shadow: 0 0 3px rgba(58,69,82,.58);
+    border: 1px solid #1cbd55;
+}
+.ico_nook {
+    width: 24px;
+    height: 24px;
+    background-image: url(../images/center/ico_scroll_j.png);
+}
+.scroll_list_on {
+    background-color: #fff;
+    box-shadow: 0 0 3px rgba(58,69,82,.58);
+    border: 1px solid #ff8a00;
+}
+.scroll_list_on .ico_nook {
+    background-image: url(../images/center/ico_scroll_j2.png);
+}
+.scroll_list_item .ico_nook {
+    display: none;
+}
+.scroll_list_current .ico_nook ,.scroll_list_on .ico_nook{
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+}
+.scroll_list_current .ico_scroll_1_1 {
+    background-image: url(../images/center/ico_scroll_1_2.png);
+}
+.scroll_list_current .ico_scroll_2_1 {
+    background-image: url(../images/center/ico_scroll_2_2.png);
+}
+.scroll_list_current .ico_scroll_3_1 {
+    background-image: url(../images/center/ico_scroll_3_2.png);
+}
+.scroll_list_current .ico_scroll_4_1 {
+    background-image: url(../images/center/ico_scroll_4_2.png);
+}
+.scroll_list_current .ico_scroll_5_1 {
+    background-image: url(../images/center/ico_scroll_5_2.png);
+}
+.scroll_leftbtn, .scroll_rightbtn {
+    position: absolute;
+    top: 80px;
+    width: 32px;
+    height: 32px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+}
+.scroll_leftbtn {
+    left: 0;
+    background-image: url(../images/center/ico_scroll_left.png);
+}
+.scroll_leftbtn:hover{
+    background-image: url(../images/center/ico_scroll_left2.png);
+}
+.scroll_rightbtn {
+    right: 0;
+    background-image: url(../images/center/ico_scroll_right.png);
+}
+.scroll_rightbtn:hover {
+    background-image: url(../images/center/ico_scroll_right2.png);
+}
+
+.mod_manage_form {
+    margin-top: 32px;
+}
+.manage_form_content {
+    margin-top: 8px;
+}
+.manage_bottom{
+	margin-top: 50px;
+	text-align: right;
+}
+.manage_bottom .btn_blue{
+	margin-left: 17px;
+}
+/* 新建应用 - 基本信息 */
+.manage_info_wrap{
+    margin-top: -1px;
+    padding: 10px 15px;
+    border: 1px solid #e4e4e4;
+}
+.manage_info_wrap .title{
+    height: 31px;
+    line-height: 31px;
+    font-size: 14px;
+    border-bottom: 1px solid #d2d2d2;
+}
+.manage_info_wrap .cont{
+    padding-top: 8px;
+    line-height: 22px;
+}
+.manage_info_wrap .cont table td{
+    vertical-align: top;
+}
+.manage_info_wrap .cont .text_1{
+    padding-right: 10px;
+}
+.manage_info_wrap .cont .text_2{
+    padding-right: 50px;
+}
+/*新建应用表单*/
+.manage_new_from{
+    margin-top: 40px;
+    padding-left: 118px;
+    width: 690px;
+}
+.control_group{
+    margin-bottom: 40px;
+    overflow: hidden;
+    zoom:1;
+}
+.control_group .tit_label{
+    float: left;
+    width: 77px;
+    line-height: 35px;
+}
+.control_group .ctols{
+    float: left;
+}
+
+.control_group .txt_original{
+    width: 376px;
+    height: 20px;
+    line-height: 20px;
+    padding: 6px 4px;
+    border: 1px solid #e4e4e4;
+}
+.control_group .hint_txts{
+    padding-top: 6px;
+    color: #a2a2a2;
+}
+.control_group .tips_wrong{
+    color: #f56e6e;
+}
+.control_group i{
+    margin-left: 6px;
+    *vertical-align: super;
+}
+
+.control_group .text_original{
+    width: 597px;
+    height: 188px;
+    line-height: 20px;
+    padding: 6px 4px;
+    border: 1px solid #e4e4e4;
+    resize: none;
+}
+.manage_new_from .manage_bottom{
+    margin-top: -20px;
+    clear: both;
+}
+.manage_success_wrap{
+    margin-top: -1px;
+    padding: 44px 0 100px 297px;
+    background-color: #fff;
+}
+.manage_success_wrap h2{
+    margin-bottom: 33px;
+    line-height: 44px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.manage_success_wrap h2 i{
+    margin-right: 25px;
+}
+.manage_success_btn .ui_btn_big{
+    margin-left: 25px;
+}
+/* 多行状态提示& 错误提示 */
+.manage_status_info {
+    margin-top: 50px;
+    padding-bottom: 40px;
+}
+.manage_status_info .ico_ny{
+    float: left;
+    margin-right: 22px;
+}
+.manage_status_info h3{
+    font-size: 18px;
+    padding-bottom: 10px;
+}
+.manage_status_info .txt{
+    color: #a2a2a2;
+}
+.manage_cate_wrap{
+    border-top: 1px solid #e4e4e4;
+}
+.manage_cate_item{
+    padding-top: 35px;
+}
+.manage_cate_item .mod_panel_title .tit{
+    font-weight:normal;
+    font-size: 16px;
+}
+.manage_cate_content{
+    margin-top:20px;
+}
+.manage_cate_content .item{
+    display: inline-block;
+    margin-right: 25px;
+    margin-bottom: 10px;
+    height: 20px;
+    line-height: 20px;
+    font-size: 14px;
+    white-space: nowrap;
+}
+.manage_cate_content .item b{
+    margin-right: 5px;
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    overflow: hidden;
+    vertical-align: middle;
+}
+.manage_cate_content .item .tit_1{
+    background-color: #309bfe;
+}
+.manage_cate_content .item .tit_2{
+    background-color: #1cbd55;
+}
+.manage_cate_content .item .tit_3{
+    background-color: #ff7c24;
+}
+.manage_cate_content .item .tit_4{
+    background-color: #1e76a8;
+}
+.manage_cate_content .item .tit_5{
+    background-color: #13cac8;
+}
+.manage_cate_content .item .tit_6{
+    background-color: #ffd824;
+}
+.manage_cate_content .item .tit_7{
+    background-color: #f70571;
+}
+.manage_cate_content .item .tit_8{
+    background-color: #9120e9;
+}
+.manage_cate_content .item .tit_9{
+    background-color: #4120e9;
+}
+.manage_cate_content .item .tit_10{
+    background-color: #1ed462;
+}
+ /************** 模版管理 *****************/
+ /* 新建模版 进度条 */
+.temp_plan_wrap li{
+    width: 230px;
+}
+/*新建模版 多图 */
+.temp_scroll_list {
+    text-align: center;
+}
+.temp_scroll_list li{
+    float: none;
+    display: inline-block;
+}
+/*查看模版*/
+.temp_tabs_wrap{
+    padding-top: 20px;
+    margin-bottom: 26px;
+}
+.temp_panel_title{
+    margin-bottom: 12px;
+}
+/* 管理模版 */
+.mod_temp_title{
+    height: 28px;
+    border-bottom: 1px solid #e4e4e4;
+}
+.mod_temp_title .tit_tip{
+    float: right;
+    color: #3094f1;
+}
+.mod_temp_title .tit_tip:hover{
+    color: #1b79d1;
+}
+.temp_manage_list{
+    width: 920px;
+}
+.temp_manage_list ul{
+    width: 1000px;
+}
+.temp_manage_list li{
+    margin:0 64px 40px 0;
+}
+.temp_manage_list .icon_cont .ico_add_temp{
+    width: 48px;
+    height: 48px;
+    margin-top: 0;
+    background-image: url(../images/center/ico_add_temp.png);
+}
+.temp_manage_list_add .icon_cont{
+    margin-top: 55px;
+}
+.temp_manage_list_add .tit{
+    color: #afb0b0;
+}
+
+ /* 规模选择弹层 */
+.data_center_drop{
+    width: 417px;
+}
+.data_center_drop ul li{
+    padding: 0 4px;
+    height: 28px;
+    line-height: 28px;
+    overflow: hidden;
+}
+.data_center_drop ul li span{
+    float: left;
+    padding: 0 8px;
+    text-align: left;
+    overflow: hidden;
+}
+.data_center_drop .cont_title{
+    background-color: #f8f8f8;
+}
+.data_center_drop .cont_row.hover{
+    background-color: #f4f4f4;
+    color: #333;
+}
+.data_center_drop .data_1{
+    width: 78px;
+}
+.data_center_drop .data_2{
+    width: 138px;
+}
+.data_center_drop .data_3{
+    width: 138px;
+}
+.data_center_drop .cont_row{
+    color: #999;
+}
+

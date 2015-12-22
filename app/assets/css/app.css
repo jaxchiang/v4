@@ -1,0 +1,122 @@
+.insert_index_wrap{
+	min-height: 904px;
+	background: url(../images/index/index_bg_1.png) repeat-x 0 0;
+}
+.insert_index_banner{
+	padding-top: 90px;
+	text-align: center;
+}
+.insert_index_banner .title_h2{
+	margin-bottom: 16px;
+	height: 42px;
+	line-height: 42px;
+	font-size: 42px;
+	color: #3c3c3c;
+	font-weight: normal;
+}
+.insert_index_banner .txt_info{
+	font-size: 15px;
+	color: #3c3c3c;
+}
+.insert_index_btn{
+	margin-top: 28px;
+}
+.insert_index_btn .ui_btn_big{
+	padding: 0 54px;
+	height: 50px;
+	line-height: 50px;
+	font-size: 16px;
+}
+.insert_index_banner .bannr{
+	margin-top: 45px;
+	padding-left: 50px;
+}
+
+.insert_compass_wrap{
+	margin-top: 69px;
+}
+.insert_compass_wrap .title_h3{
+	height: 63px;
+	line-height: 63px;
+	color: #2b2b2b;
+	font-size: 30px;
+	font-weight: normal;
+	text-align: center;
+}
+.insert_compass_wrap ul{
+	padding-top: 15px;
+}
+.insert_compass_wrap ul li{
+	float: left;
+	min-height: 180px;
+	text-align: center;
+}
+.insert_compass_item{
+	width: 193px;
+}
+.insert_compass_item .tit{
+	margin-top: 20px;
+	height: 40px;
+	line-height: 40px;
+	font-size: 24px;
+	color: #252525;
+	font-weight: normal;
+}
+.insert_compass_item p{
+	margin-top: 4px;
+	line-height: 24px;
+	font-size: 14px;
+	color: #a2a2a2;
+}
+.insert_compass_wrap ul li.last{
+	width: 198px;
+}
+.insert_compass_wrap ul li.line{
+	width: 60px;
+}
+.insert_compass_wrap ul li.line{
+	margin-top: 92px;
+}
+.ico_insign,.ico_innew,.ico_insubmit,.ico_inuse{
+	width: 60px;
+	height: 60px;
+}
+.ico_insign{
+	background-image: url(../images/app/ico_bot_1.png);
+}
+.ico_innew{
+	background-image: url(../images/app/ico_bot_2.png);
+}
+.ico_insubmit{
+	background-image: url(../images/app/ico_bot_3.png);
+}
+.ico_inuse{
+	background-image: url(../images/app/ico_bot_4.png);
+}
+.ico_ddd{
+	width: 33px;
+	height: 7px;
+	background-image: url(../images/center/ico_ddd.png);
+}
+
+/*产品介绍*/
+.about_wrap{
+	background: url(../images/app/about_banner_bg.jpg) repeat-x top 0;
+}
+.about_banner{
+	min-height: 600px;
+	background: url(../images/app/about_banner.jpg) no-repeat top center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

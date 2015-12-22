@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>云搜索开放平台-管理应用</title>
+    <meta name="Copyright" content="Tencent" />
+    <meta name="Keywords" content="云搜索开放平台" />
+    <meta name="Description" content="云搜索开放平台" />
+    <!-- 组件样式 -->
+    <link rel="stylesheet" href="http://imgcache.qq.com/open_proj/proj_qcloud_v2/bee/css/bee.css">
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/manage.css">
+    <link rel="stylesheet" href="../assets/css/yunsou2.css">
+</head>
+
+<body>
+    <div class="layout_wrap">
+        <div class="layout_container clearfix">
+            <div class="header">
+                <div class="head_topbar ui_maxw">
+                    <div class="logo">
+                        <a href="#">
+                            <img class="logo_img" src="../assets/images/common/logo2.png" alt="云搜管理中心"> 云搜管理中心
+                        </a>
+                    </div>
+                    <div class="nav">
+                        <ul>
+                            <li class="current"><a href="#">应用管理</a></li>
+                            <li><a href="#">模板管理</a></li>
+                            <li><a href="#">资源下载</a></li>
+                            <li><a href="#">个人中心</a></li>
+                            <li><a href="#">管理界面</a></li>
+                        </ul>
+                    </div>
+                    <div class="head_user">
+                        <span class="user_avatar">
+                    <img class="avatar" src="../assets/images/data/sunnycchen.png" alt="">
+                </span>
+                        <a href="#" class="user_name">sunnycchen</a>
+                        <i class="line">|</i>
+                        <a href="#" class="user_esc">注销</a>
+                    </div>
+                </div>
+            </div>
+            <div class="ny_container ui_maxw clearfix">
+                <div class="mod_container_title">
+                    <h2 class="tit">应用管理</h2>
+                </div>
+                <div class="sidebar">
+                    <!-- 一级菜单 -->
+                    <!-- <ul class="side_list">
+                <li class="current"><a href="#">基本信息</a></li>
+                <li><a href="#">配额管理</a></li>
+                <li><a href="#">应用结构修改</a></li>
+                <li><a href="#">高级组件定制</a></li>
+                <li><a href="#">运营管理</a></li>
+            </ul> -->
+                    <!-- 二级菜单 -->
+                    <ul class="side_cate_warp" id="sideThree">
+                        <li>
+                            <a class="side_category current" href="javascript:void(0);">IOA <i class="dir"></i></a>
+                            <ul class="side_cate_sub" style="display:block;">
+                                <li><a class="side_category_sub" href="javascript:void(0);">邮箱</a></li>
+                                <li><a class="side_category_sub" href="javascript:void(0);">iOA</a></li>
+                                <li><a class="side_category_sub" href="javascript:void(0);">VPN</a></li>
+                                <li class="current"><a class="side_category_sub" href="javascript:void(0);">RTX</a></li>
+                                <li><a class="side_category_sub" href="javascript:void(0);">TFS</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="side_category" href="javascript:void(0);">运维<i class="dir"></i></a>
+                            <ul class="side_cate_sub">
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="side_category" href="javascript:void(0);">硬件<i class="dir"></i></a>
+                            <ul class="side_cate_sub">
+                                <li><a class="side_category_sub" href="javascript:void(0);">TOKEN</a></li>
+                                <li><a class="side_category_sub" href="javascript:void(0);">电脑更换</a></li>
+                                <li><a class="side_category_sub" href="javascript:void(0);">打印机配置</a></li>
+                                <li><a class="side_category_sub" href="javascript:void(0);">电话</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="side_category" href="javascript:void(0);">网络服务<i class="dir"></i></a>
+                            <ul class="side_cate_sub">
+                                <li><a class="side_category_sub" href="javascript:void(0);">网络</a></li>
+                                <li><a class="side_category_sub" href="javascript:void(0);">TFS</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="main">
+                    <div class="apply_main">
+                        <div class="apply_tabs_wrap">
+                            <ul class="mod_tabs_list">
+                                <li class="current"><span title="elleheTest">elleheTest</span></li>
+                                <li><span title="Test1">Test1</span></li>
+                                <li><span title="Test2">Test2</span></li>
+                                <li><span title="Test3">Test3</span></li>
+                                <li class="last" title="添加项目"><i class="ico_ny ico_add"></i></li>
+                            </ul>
+                        </div>
+                        <div class="apply_tabs_content">
+                            <div class="apply_panel_wrap">
+                                <div class="mod_panel_title">
+                                    <h3 class="tit">基本信息</h3>
+                                    <div class="apply_panel_btn func_link">
+                                        <a href="#" class="func_btn">上传数据</a>
+                                        <a href="#" class="func_btn">体验测试</a>
+                                        <a href="#" class="func_btn">删除应用</a>
+                                        <div class="mod_tipspanel" style="top:38px; left:-30px;">
+                                            <div class="mod_tipspanel_content">
+                                                <b class="bor"></b>
+                                                <p>还没有任何数据哦！
+                                                    <br> 马上上传后开启搜索服务
+                                                </p>
+                                                <a href="#" class="ico_ny ico_close"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="apply_panel_cont">
+                                    <div class="topbar">
+                                        <div class=" topbar_left">
+                                            <h4 class="tit">中国国家搜索平台项目（ID：2124124）</h4>
+                                            <p class="remarks">应用描述：这是一个国家级的高级项目。</p>
+                                        </div>
+                                        <div class=" topbar_right">
+                                            <p class="">安全凭证：<a href="##" class="text_link">secretKey</a></p>
+                                            <p class="">创建时间：2015-11-18 19:33:33</p>
+                                        </div>
+                                    </div>
+                                    <div class="status_bar">
+                                        <i class="icon_free"></i>
+                                        <p class="status_title">免费试用中</p>
+                                        <p class="status_tips">还剩 <span class="num">7</span> 天</p>
+                                    </div>
+                                    <div class="usage_bar">
+                                        <div class="usage_bar_line">
+                                            <span class="usage_bar_title">文档量：</span>
+                                            <div class="tc-15-progress">
+                                                <div class="tc-15-progress-value" aria-valuemax="100" aria-valuemin="0" aria-valuenow="30" style="width:30%">
+                                                    <span><i class="text_link">0.16</i> / 0.2G</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="usage_bar_line">
+                                            <span class="usage_bar_title">本月每秒搜索请求量峰值：</span>
+                                            <p class="usage_bar_content"><span class="text_link">8</span> / 10次</p>
+                                        </div>
+                                        <div class="usage_bar_line">
+                                            <a href="##" class="text_link">立即选购</a>
+                                            <div class="tc-15-bubble  tc-15-bubble-left">
+                                                <div class="tc-15-bubble-inner">
+                                                    您还可以选择更高级的服务
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <ul class="apply_panel_list clearfix">
+                                        <li class="apply_panel_item">
+                                            <i class="ico_ny ico_status_green" style="display: none;"></i>
+                                            <i class="ico_ny ico_status_orange"></i>
+                                            <p class="txt">接入时间：2013-12-02</p>
+                                            <span class="function_btn">
+                                        <a href="" class="btn current">开启</a>
+                                        <a href="" class="btn">暂停</a>
+                                    </span>
+                                        </li>
+                                        <li class="apply_panel_item">
+                                            <div class="text">文本量</div>
+                                            <p class="num">789789789</p>
+                                        </li>
+                                        <li class="apply_panel_item">
+                                            <div class="text">每秒搜索请求量峰值</div>
+                                            <p class="num">789789789</p>
+                                        </li>
+                                        <li class="apply_panel_item last">
+                                            <div class="text">今日搜索</div>
+                                            <p class="num">789789789</p>
+                                        </li>
+                                    </ul> -->
+                                </div>
+                                <div class="operate_bar">
+                                    <button type="button" class="tc-15-btn m weak pause">暂停服务</button>
+                                </div>
+                            </div>
+                            <!-- 一个板块结束 -->
+                            <div class="apply_data_wrap">
+                                <div class="mod_panel_title">
+                                    <h3 class="tit">运营数据</h3>
+                                </div>
+                                <div class="apply_data_item">
+                                    <h4 class="apply_data_tit">搜索量数据</h4>
+                                    <div class="apply_data_cont">
+                                        <div class="data_choice">
+                                            <span class="data_choice_date">
+                                        <a href="#" class="btn current">今日</a>
+                                        <a href="#" class="btn">昨日</a>
+                                        <a href="#" class="btn">最近7日</a>
+                                        <a href="#" class="btn">最近30日</a>
+                                    </span>
+                                            <select class="data_choice_select">
+                                                <option>2014-10-20 至 2014-11-20</option>
+                                                <option>2014-10-20 至 2014-11-20</option>
+                                                <option>2014-10-20 至 2014-11-20</option>
+                                            </select>
+                                            <span class="data_choice_chk">
+                                        <input type="checkbox" id="data_choice_chk_input">
+                                        <label for="data_choice_chk_input">对比</label>
+                                    </span>
+                                            <select class="data_choice_select">
+                                                <option>2014-10-20 至 2014-11-20</option>
+                                                <option>2014-10-20 至 2014-11-20</option>
+                                                <option>2014-10-20 至 2014-11-20</option>
+                                            </select>
+                                        </div>
+                                        <div class="data_form">
+                                            <img src="../assets/images/data/data-1.jpg" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="apply_data_item">
+                                    <h4 class="apply_data_tit">搜索量峰值统计</h4>
+                                    <div class="apply_data_cont">
+                                        <div class="data_choice">
+                                            <span class="data_choice_date">
+                                        <a href="#" class="btn current">今日</a>
+                                        <a href="#" class="btn">昨日</a>
+                                        <a href="#" class="btn">最近7日</a>
+                                        <a href="#" class="btn">最近30日</a>
+                                    </span>
+                                            <select class="data_choice_select">
+                                                <option>2014-10-20 至 2014-11-20</option>
+                                                <option>2014-10-20 至 2014-11-20</option>
+                                                <option>2014-10-20 至 2014-11-20</option>
+                                            </select>
+                                            <span class="data_choice_chk">
+                                        <input type="checkbox" id="data_choice_chk_input">
+                                        <label for="data_choice_chk_input">对比</label>
+                                    </span>
+                                            <select class="data_choice_select">
+                                                <option>2014-10-20 至 2014-11-20</option>
+                                                <option>2014-10-20 至 2014-11-20</option>
+                                                <option>2014-10-20 至 2014-11-20</option>
+                                            </select>
+                                        </div>
+                                        <div class="data_form">
+                                            <img src="../assets/images/data/data-1.jpg" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="copyright ui_maxw">
+                    <p class="txt">Copyright &copy; 1998 - 2015 Tencent. All Rights Reserved.</p>
+                    <p class="txt"><a href="#" target="_blank">开发者协议</a> | <a href="#" target="_blank">联系我们</a> | <a href="#" target="_blank">投诉建议</a></p>
+                    <div class="foot_link">
+                        <a href="#" target="_blank" class="ico_foot_mail"></a>
+                        <a href="#" target="_blank" class="ico_foot_wechat">
+                            <div class="link_show">
+                                <b class="bar"></b>
+                                <p class="tit">扫码关注“腾讯云搜”</p>
+                                <div class="photo">
+                                    <img src="../assets/images/common/wechat_show.png" alt="扫码关注“腾讯云搜”">
+                                </div>
+                            </div>
+                        </a>
+                        <a href="#" target="_blank" class="ico_foot_qq"></a>
+                    </div>
+                </div>
+            </div>
+            <script type="text/javascript" src="../assets/js/vendor/jquery.min.js"></script>
+            <script type="text/javascript" src="../assets/js/common.js"></script>
+        </div>
+        <div class="mask mask_expored"></div>
+        <div class="dialog_layer_v2 dialog_app_manage">
+            <div class="dialog_layer_main">
+                <div class="dialog_layer_title">
+                    <h3>暂停服务</h3><a class="close" title="关闭" href="javascript:;"><i>×</i></a>
+                </div>
+                <div class="dialog_layer_cont">
+                    <i class="icon_pause"></i>
+                    <p class="dialog_title">确认要暂停应用“elleTest”的搜索服务吗？</p>
+                    <p class="dialog_content">暂停服务后，该应用将无法继续使用搜索服务，搜索后无结果返回。</p>
+                </div>
+                <div class="dialog_layer_ft">
+                    <a href="javascript:void(0);" class="btn btn_blue"><span>确定暂停</span></a><a href="javascript:void(0);" class="btn btn_white_2"><span>取消</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="dialog_layer_v2 dialog_app_expired">
+            <div class="dialog_layer_main">
+                <div class="dialog_layer_title">
+                    <h3>服务已过期</h3><a class="close" title="关闭" href="javascript:;"><i>×</i></a>
+                </div>
+                <div class="dialog_layer_cont">
+                    <i class="icon_pause"></i>
+                    <p class="dialog_title">应用“elleheTest”已到期！</p>
+                    <p class="dialog_content">该应用已于2015-12-08过期，会导致：</p>
+                    <p class="dialog_content">1)过期24小时后，停用服务；过期7天后，自动下线并清除后台数据；</p>
+                    <p class="dialog_content">2)对于已过期应用，将不允许进行任何修改操作。</p>
+                    <p class="dialog_content">为了保证您的搜索服务，建议尽快续费！</p>
+                </div>
+                <div class="dialog_layer_ft">
+                    <a href="javascript:void(0);" class="btn btn_blue"><span>去续费</span></a><a href="javascript:void(0);" class="btn btn_white_2"><span>以后再说</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../assets/js/vendor/jquery.min.js"></script>
+    <script>
+    $('.pause').on('click', function(event) {
+        event.preventDefault();
+        $('.mask').show();
+        $('.dialog_app_manage').show();
+    });
+
+    $('.close').on('click', function(event) {
+        event.preventDefault();
+        $('.mask').hide();
+        $('.dialog_layer_v2').hide();
+    });
+    </script>
+</body>
+
+</html>
