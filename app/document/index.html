@@ -1,0 +1,201 @@
+{% extends './layouts/default.html' %}
+
+{% set page.title = 'Mozi.gulp 使用指北' %}
+
+{% block content %}
+<h1>{{ page.title }}</h1>
+<div class="container">
+    <h2>介绍</h2>
+    <p>Mozi.gulp(<a href="http://git.code.oa.com/mozi/Mozi.gulp">http://git.code.oa.com/mozi/Mozi.gulp</a>) 总结了墨子工作室日常开发中常用到的自动化需求，包含 LESS 编译，Swig 模版支持，静态资源加 hash 防止缓存，自动部署到 FTP，UI 组件文档，代码高亮等功能。</p>
+    <p>Mozi.gulp 还有更多待开发的特性：</p>
+    <ul>
+        <li>代码检查</li>
+        <li>自动生成雪碧图</li>
+        <li>JS 模块化支持</li>
+        <li>增加常用 JS 库</li>
+    </ul>
+    <p>Mozi.gulp 使用的第三方库文档：</p>
+    <ul>
+        <li>Less: <a href="http://lesscss.org/">http://lesscss.org/</a></li>
+        <li>Est: <a href="http://ecomfe.github.io/est/">http://ecomfe.github.io/est/</a></li>
+        <li>Swig: <a href="http://paularmstrong.github.io/swig/docs/">http://paularmstrong.github.io/swig/docs/</a></li>
+    </ul>
+
+    <h2>快速上手</h2>
+    <p>因为我们大部分的项目中使用的是 SVN，所以使用 SVN 的项目可以直接在项目文件夹中 clone 一个 Mozi.gulp 项目。</p>
+    <p>如，我准备新建一个 Tencent_2015Q3 的项目，在该项目文件夹中运行：</p>
+{% highlight 'bash' %}
+git init
+git remote add origin http://git.code.oa.com/mozi/Mozi.gulp.git
+git fetch
+git checkout -t origin/master
+{% endhighlight %}
+    <p>然后根据 <code>_config/config.sample.js</code> 的模版创建一个 <code>_config/config.js</code> 文件，在 <code>config.js</code> 文件中只保留需要的配置项即可，<code>config.sample.js</code> 作为缺省的配置会被 <code>config.js</code> 的值覆盖。</p>
+
+    <h2>文件目录说明</h2>
+{% highlight 'js' %}
+.
+├── _config             // gulp 配置文件夹
+├── app                 // 开发文件目录
+│   ├── assets          // 静态资源目录
+│   │   ├── css         // 样式文件目录
+│   │   ├── fonts       // 字体文件目录
+│   │   ├── images      // 图片文件目录
+│   │   ├── media       // 媒体文件目录
+│   │   └── js          // 脚本文件目录
+│   │       └── vendor  // 第三方脚本文件目录
+│   ├── document        // swig 文档模版文件
+│   ├── docs            // 自动编译后的文档文件
+│   ├── html            // 自动编译后的 HTML 文件目录
+│   ├── less            // less 文件
+│   │   ├── src         // 用于引用的 less 文件
+│   │   └── vendor      // 第三方 less 库
+│   │       └── est     // est less
+│   └── template        // swig 模版文件
+│       ├── layouts     // 布局模版
+│       └── partials    // 模版模块
+└─── dist               // 最后编译后的文件
+{% endhighlight %}
+
+    <h2>配置 Mozi.gulp</h2>
+    <p>编辑 Mozi.gulp 目录下的 <code>/_config/config.js</code>，其中必须修改 <code>ftpPath</code> 为你需要发布的文件路径，为了防止多个 Mozi.gulp 项目冲突，可以修改 <code>serverPort</code> 以及 <code>livereloadPort</code> 两个属性。</p>
+{% highlight 'js' %}
+var config = {
+
+    // 项目名称
+    projectName     : 'Mozi.gulp',
+
+    // 调试服务器地址
+    serverHost      : '0.0.0.0',
+
+    // 调试服务器端口
+    serverPort      : 8099,
+
+    // livereload 端口
+    livereloadPort  : 35729,
+
+    // 默认打开页面
+    serverIndex     : '/html/index.html',
+
+    // 开发文件目录
+    app             : 'app',
+
+    // 编译文件目录
+    dist            : 'dist',
+
+    // 需编译 less 文件
+    lessFiles       : ['app/less/*.less'],
+
+    // 需编译模版文件
+    tmplFiles       : ['app/template/*.html'],
+
+    // 脚本文件
+    scriptFiles     : ['app/assets/js/*.js'],
+
+    // 第三方脚本文件
+    venforFiles     : ['app/assets/js/vendor/*.js'],
+
+    // bower 脚本文件
+    componentsFiles : [],
+
+    // 需监听的 less 文件
+    lessFiles4Watch : ['app/less/**/*.less'],
+
+    // 需监听的模版文件
+    tmplFiles4Watch : ['app/template/**/*.html'],
+
+    // CSS 文件输出位置
+    cssOutputDir    : 'app/assets/css',
+
+    // HTML 文件输出位置
+    tmplOutputDir   : 'app/html',
+
+    // Docs 文档模版
+    docsTmplFiles   : ['app/document/*.html'],
+
+    // Docs 文档输出位置
+    docsOutputDir   : 'app/docs',
+
+    // 启用 rev
+    rev             : true,
+
+    // rev 需要拷贝的文件
+    revFiles        : [
+        'app/**',
+        '!app/less',
+        '!app/less/**',
+        '!app/template',
+        '!app/template/**',
+        '!app/document',
+        '!app/document/**',
+        '!app/components',
+        '!app/components/**'
+    ],
+
+    // rev 需要忽略的文件
+    revIgnore       : [
+        /^\/favicon.ico$/ig,
+        /^\/assets\/js\/vendor\//ig
+    ],
+
+    // rev 需要忽略重命名文件
+    revIgnoreRename : [
+        '.html'
+    ],
+
+    // rev 不需要在这个文件检索替换
+    revIgnoreSearch : [],
+
+    // rev 不需要更新他的版本的文件
+    revIgnoreUpdate : [
+        '.html'
+    ],
+
+    // FTP 服务器
+    ftpHost: 'demo.cdc.im',
+
+    // FTP 账号
+    ftpUser: 'mode',
+
+    // FTP 密码
+    ftpPass: '',
+
+    // FTP 路径
+    // demo.cdc.im 的路径请设置前缀 /domains/demo.cdc.im/public_html/
+    ftpPath: '/domains/demo.cdc.im/public_html/testUpload'
+
+}
+
+module.exports = config;
+{% endhighlight %}
+
+    <h2>使用教程</h2>
+
+    <h3>开启本地调试功能</h3>
+    <p>运行后会自动运行本地静态服务器环境，并监听文件变化自动刷新。</p>
+{% highlight 'bash' %}
+gulp --dev
+{% endhighlight %}
+
+    <h3>编译待发布版本</h3>
+    <p>运行后会将可以发布的静态文件编译并拷贝到 <code>./dist</code> 文件夹内，如果开启了 <code>rev</code> 则会对静态资源文件加 hash 防止缓存。</p>
+{% highlight 'bash' %}
+gulp build
+{% endhighlight %}
+
+    <h3>发布待发布版本到 FTP（需先配置 FTP 路径）</h3>
+    <p>运行后会将 <code>./dist</code> 目录中的所有文件通过 FTP 上传到 <code>config.ftpPath</code> 指定的路径上。</p>
+{% highlight 'bash' %}
+gulp deploy
+{% endhighlight %}
+
+    <h3>打包 zip 文件</h3>
+    <p>运行后会将 <code>./dist</code> 目录中的所有文件压缩成 zip 文件到 <code>./release</code> 中，方便存档备份。</p>
+    <p>zip 文件的命名方式默认以 <code>config.projectName_版本号.zip</code> 命名，<code>-v</code> 参数可以指定版本号，不指定版本号则以当前时间作为版本号。</p>
+{% highlight 'bash' %}
+gulp release // Mozi.gulp_1510291305.zip
+
+gulp release -v 1.0.1 // Mozi.gulp_1.0.1.zip
+{% endhighlight %}
+</div>
+{% endblock %}
