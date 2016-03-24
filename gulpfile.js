@@ -14,6 +14,7 @@ var vpath    = require('vinyl-paths');
 var combiner = require('stream-combiner2');
 var merge    = require('merge-stream');
 var moment   = require('moment');
+
 var $        = require('gulp-load-plugins')({
     pattern: ['gulp-*', 'gulp.*'],
     replaceString: /\bgulp[\-.]/
@@ -70,13 +71,91 @@ gulp.task('css', function() {
         (sourceMap ? $.sourcemaps.init({ loadMaps: true }) : gutil.noop()),
         $.less(),
         $.autoprefixer({ browsers: ['> 1%', 'IE 7'] }),
-        (isProduction ? $.minifyCss({ compatibility: 'ie7' }) : gutil.noop()),
         (sourceMap ? $.sourcemaps.write() : gutil.noop()),
         gulp.dest(config.cssOutputDir)
     ]);
 
     combined.on('error', console.error.bind(console));
 
+    return combined;
+});
+
+
+// 处理脚本任务
+gulp.task('script', function() {
+
+    var combined = combiner.obj([
+        gulp.src(
+	        [
+                'app/script/util.js',
+                'app/script/config.js',
+                'app/script/ascii.js',
+                'app/script/objects.js',
+                'app/script/api.js',
+                'app/script/ui.js',
+                'app/script/scene.js',
+                'app/script/events.js',
+                'app/script/main.js'
+            ]
+        ),
+        $.concat('app.js'),
+        (sourceMap ? $.sourcemaps.init({ loadMaps: true }) : gutil.noop()),
+        (sourceMap ? $.sourcemaps.write() : gutil.noop()),
+        gulp.dest(config.jsOutputDir)
+
+    ]);
+
+    combined.on('error', console.error.bind(console));
+	
+	var vendorCombined = combiner.obj([
+        gulp.src(
+	        [
+	            "app/script/vendor/three.min.js",
+	            "app/script/vendor/Detector.js",
+	            "app/script/vendor/seedrandom.js",
+	            "app/script/vendor/TweenMax.min.js",
+	            "app/script/vendor/jquery-2.1.3.js",
+	            "app/script/vendor/modernizr.min.js",
+	            "app/script/vendor/DeviceOrientationControls.js",
+	            "app/script/vendor/fastclick.js",
+	            "app/script/vendor/iscroll.js"
+	        ]
+	        
+        ),
+        $.concat('vendor.js'),
+        (sourceMap ? $.sourcemaps.init({ loadMaps: true }) : gutil.noop()),
+        (sourceMap ? $.sourcemaps.write() : gutil.noop()),
+        gulp.dest(config.jsOutputDir)
+    ]);
+    
+    vendorCombined.on('error', console.error.bind(console));
+    
+    return merge(combined, vendorCombined);
+});
+
+// 处理svg任务
+gulp.task('svg', function() {
+
+    var combined = combiner.obj([
+        gulp.src(config.svgFiles),
+        $.svgSprite({
+	        mode				: {
+				view			: {			// Activate the «view» mode 
+					bust		: false,
+					render		: {
+						less	: true		// Activate Sass output (with default options) 
+					}
+				},
+				symbol			: true		// Activate the «symbol» mode 
+			}
+		}),
+		gulp.dest(config.svgOutputDir)
+    ]);
+
+    combined.on('error', console.error.bind(console));
+	
+	
+    
     return combined;
 });
 
@@ -127,9 +206,37 @@ gulp.task('rev', ['css', 'template', 'clean'], function() {
 
     return gulp.src(config.revFiles, { base: config.app })
         .pipe(config.rev ? revAll.revision() : gutil.noop())
+		
         .pipe(gulp.dest(config.dist))
         .pipe(config.rev ? revAll.manifestFile() : gutil.noop())
         .pipe(config.rev ? gulp.dest(config.dist) : gutil.noop());
+});
+
+gulp.task('minify', ['css', 'template', 'clean','rev'], function() {
+    
+    var combinedJS = combiner.obj([
+        gulp.src('dist/assets/js/*.js'),
+        $.uglify(),
+        gulp.dest('dist/assets/js')
+    ]);
+
+	var combinedCSS = combiner.obj([
+        gulp.src('dist/assets/css/*.css'),
+        $.minifyCss({ compatibility: 'ie7' }),
+        gulp.dest('dist/assets/css')
+    ]);
+    
+    var combinedImg = combiner.obj([
+        gulp.src('dist/assets/images/*'),
+        $.imagemin({ 
+	        progressive: true
+		 }),
+        gulp.dest('dist/assets/images')
+    ]);
+    
+    combinedJS.on('error', console.error.bind(console));
+
+    return combinedJS,combinedCSS,combinedImg;
 });
 
 // 发布文件到 ftp
@@ -168,17 +275,14 @@ gulp.task('release', ['rev'], function() {
 
 // 开发任务
 // gulp --dev
-gulp.task('default', ['css', 'template'], function() {
+gulp.task('default', ['css','script'], function() {
     // 监听 less 文件变化
     gulp.watch(config.lessFiles4Watch, ['css']).on('change', function(evt) {
         handleChangeEvent(evt);
     });
-
-    // 监听模版文件变化
-    gulp.watch(config.tmplFiles4Watch, ['template']).on('change', function(evt) {
+	gulp.watch(config.script4Watch, ['script']).on('change', function(evt) {
         handleChangeEvent(evt);
     });
-
     // 启动本地调试服务器
     gulp.src(config.app)
         .pipe($.webserver({
@@ -191,4 +295,4 @@ gulp.task('default', ['css', 'template'], function() {
 });
 
 // 发布任务
-gulp.task('build', ['css', 'template', 'clean', 'rev']);
+gulp.task('build', ['css','script','clean', 'rev','minify']);
